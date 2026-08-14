@@ -1,5 +1,5 @@
 // Content lives here so new reviews, videos and recommendations can be added without editing the layout.
-const content = {
+let content = {
   videos: [
     { title: 'The horror films that genuinely disturbed me', meta: 'Deep dive · 3 days ago', image: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1100&q=85', url: 'https://www.youtube.com/@lauraloveshorrors' },
     { title: '10 psychological horror films you need to see', meta: 'Recommendations · 1 week ago', image: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=800&q=85', url: 'https://www.youtube.com/@lauraloveshorrors' },
@@ -17,6 +17,28 @@ const content = {
     { title: 'The Night House', year: '2020', genre: 'Horror', rating: '★★★★', image: 'https://images.unsplash.com/photo-1549490349-8643362247b5?auto=format&fit=crop&w=600&q=80' }
   ],
 };
+
+try {
+  const saved = await fetch('./content/site.json', { cache: 'no-store' }).then(response => response.ok ? response.json() : {});
+  content = { ...content, ...saved };
+  const editableFields = {
+    'about-bio': saved.about_bio,
+    'podcast-label': saved.podcast_label,
+    'podcast-kicker': saved.podcast_kicker,
+    'podcast-title-one': saved.podcast_title_one,
+    'podcast-title-two': saved.podcast_title_two,
+    'podcast-description': saved.podcast_description,
+    'podcast-status': saved.podcast_status,
+    'press-copy': saved.press_copy,
+    'contact-copy': saved.contact_copy
+  };
+  Object.entries(editableFields).forEach(([key, value]) => {
+    const element = document.querySelector(`[data-edit="${key}"]`);
+    if (element && value) element.textContent = value;
+  });
+} catch (error) {
+  console.info('Using the built-in website content.');
+}
 
 document.querySelector('#video-grid').innerHTML = content.videos.map((v, i) => i === 0 ? `
   <article class="video-embed"><iframe src="https://www.youtube-nocookie.com/embed/mJUkFrxHfoY?start=106" title="Latest Laura Loves Horror video" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><div class="embed-caption"><p class="video-meta">Latest upload · Laura Loves Horror</p><a href="https://www.youtube.com/watch?v=mJUkFrxHfoY" target="_blank" rel="noreferrer">Watch on YouTube <span>↗</span></a></div></article>` : `
@@ -43,7 +65,7 @@ renderReviews();
 
 
 // Add your actual Shopify destination here when it is ready. All Shop links update automatically.
-const SHOP_URL = 'https://www.laura-studio.store/pages/laura-loves-horror';
+const SHOP_URL = content.shop_url || 'https://www.laura-studio.store/pages/laura-loves-horror';
 document.querySelectorAll('[data-shop-link]').forEach(link => { link.href = SHOP_URL; link.target = '_blank'; link.rel = 'noreferrer'; });
 
 const toggle = document.querySelector('.menu-toggle');

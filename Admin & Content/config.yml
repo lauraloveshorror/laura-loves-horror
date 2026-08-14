@@ -1,0 +1,25 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "site"
+    label: "Website content"
+    files:
+      - label: "Main website text & links"
+        name: "main_content"
+        file: "content/site.json"
+        fields:
+          - { label: "About Laura", name: "about_bio", widget: "text" }
+          - { label: "Podcast label", name: "podcast_label", widget: "string" }
+          - { label: "Podcast subtitle", name: "podcast_kicker", widget: "string" }
+          - { label: "Podcast title, first line", name: "podcast_title_one", widget: "string" }
+          - { label: "Podcast title, red line", name: "podcast_title_two", widget: "string" }
+          - { label: "Podcast description", name: "podcast_description", widget: "text" }
+          - { label: "Podcast status", name: "podcast_status", widget: "string" }
+          - { label: "Press & media copy", name: "press_copy", widget: "text" }
+          - { label: "Contact section copy", name: "contact_copy", widget: "text" }
+          - { label: "Shopify shop URL", name: "shop_url", widget: "string" }
