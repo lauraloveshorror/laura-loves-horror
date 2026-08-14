@@ -5,16 +5,16 @@ let content = {
     { id: 'ZGZzD5VdA7Q', label: 'Laura Loves Horror · Watch now' },
     { id: 'NbIny7Vej34', start: 8, label: 'Laura Loves Horror · Watch now' }
   ],
-  review: { title: 'The Last Stop in Yuma County', year: '2023', director: 'Francis Galluppi', genre: 'Neo-noir · Thriller', rating: '★★★★½', image: 'https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=1000&q=85', copy: 'A wickedly controlled pressure-cooker that turns one empty desert diner into a sweat-soaked nightmare. Funny, mean and genuinely unpredictable.', url: 'the-last-stop-in-yuma-county.html' },
+  review: { title: 'The Orphanage', year: '2007', director: 'J. A. Bayona', genre: 'Gothic horror · Drama', rating: '★★★★★', image: 'orphanage-still.jpg', copy: 'A beautifully haunting ghost story that is as heartbreaking as it is frightening. Laura loved it — an absolute five-star watch.', url: 'the-orphanage.html' },
   reviews: [
-    { title: 'The Last Stop in Yuma County', year: '2023', genre: 'Psychological Thriller', rating: '★★★★½', image: 'https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=600&q=80' },
-    { title: 'When Evil Lurks', year: '2023', genre: 'Supernatural', rating: '★★★★', image: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=80' },
-    { title: 'Talk to Me', year: '2023', genre: 'A24 / Independent', rating: '★★★★', image: 'https://images.unsplash.com/photo-1509248961158-e54f6934749c?auto=format&fit=crop&w=600&q=80' },
-    { title: 'The Outwaters', year: '2022', genre: 'Found Footage', rating: '★★★½', image: 'https://images.unsplash.com/photo-1522083165195-3424ed129620?auto=format&fit=crop&w=600&q=80' },
-    { title: 'Titane', year: '2021', genre: 'Body Horror', rating: '★★★★½', image: 'https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=600&q=80' },
-    { title: 'Cure', year: '1997', genre: 'International', rating: '★★★★★', image: 'https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?auto=format&fit=crop&w=600&q=80' },
-    { title: 'The House of the Devil', year: '2009', genre: 'Cult', rating: '★★★★', image: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80' },
-    { title: 'The Night House', year: '2020', genre: 'Horror', rating: '★★★★', image: 'https://images.unsplash.com/photo-1549490349-8643362247b5?auto=format&fit=crop&w=600&q=80' }
+    { title: 'The Orphanage', year: '2007', genre: 'Gothic Horror', rating: '★★★★★', image: 'orphanage-still.jpg', url: 'the-orphanage.html' },
+    { title: 'When Evil Lurks', year: '2023', genre: 'Supernatural', rating: '★★★★', image: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=80', slug: 'when-evil-lurks' },
+    { title: 'Talk to Me', year: '2023', genre: 'A24 / Independent', rating: '★★★★', image: 'https://images.unsplash.com/photo-1509248961158-e54f6934749c?auto=format&fit=crop&w=600&q=80', slug: 'talk-to-me' },
+    { title: 'The Outwaters', year: '2022', genre: 'Found Footage', rating: '★★★½', image: 'https://images.unsplash.com/photo-1522083165195-3424ed129620?auto=format&fit=crop&w=600&q=80', slug: 'the-outwaters' },
+    { title: 'Titane', year: '2021', genre: 'Body Horror', rating: '★★★★½', image: 'https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=600&q=80', slug: 'titane' },
+    { title: 'Cure', year: '1997', genre: 'International', rating: '★★★★★', image: 'https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?auto=format&fit=crop&w=600&q=80', slug: 'cure' },
+    { title: 'The House of the Devil', year: '2009', genre: 'Cult', rating: '★★★★', image: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80', slug: 'the-house-of-the-devil' },
+    { title: 'The Night House', year: '2020', genre: 'Horror', rating: '★★★★', image: 'https://images.unsplash.com/photo-1549490349-8643362247b5?auto=format&fit=crop&w=600&q=80', slug: 'the-night-house' }
   ]
 };
 
@@ -36,9 +36,21 @@ const reviewGrid = document.querySelector('#review-grid');
 if (filterRoot && reviewGrid) {
   const filters = ['All', 'Horror', 'Psychological Thriller', 'Supernatural', 'Found Footage', 'Body Horror', 'Cult', 'International', 'A24 / Independent'];
   filterRoot.innerHTML = filters.map((filter, i) => `<button class="filter ${i === 0 ? 'active' : ''}" data-filter="${filter}">${filter}</button>`).join('');
-  const renderReviews = () => { const selected = filterRoot.querySelector('.active').dataset.filter; const search = document.querySelector('#review-search').value.trim().toLowerCase(); const shown = content.reviews.filter(review => (selected === 'All' || review.genre === selected) && `${review.title} ${review.year} ${review.genre}`.toLowerCase().includes(search)); reviewGrid.innerHTML = shown.map(review => `<article class="archive-card" style="--image:url('${review.image}')"><p class="review-meta">${review.year} · ${review.genre}</p><h3>${review.title}</h3><p class="rating">${review.rating}</p></article>`).join('') || '<p class="empty">Nothing lurking here yet. Try another search.</p>'; };
+  const renderReviews = () => { const selected = filterRoot.querySelector('.active').dataset.filter; const search = document.querySelector('#review-search').value.trim().toLowerCase(); const shown = content.reviews.filter(review => (selected === 'All' || review.genre === selected) && `${review.title} ${review.year} ${review.genre}`.toLowerCase().includes(search)); reviewGrid.innerHTML = shown.map(review => `<a class="archive-card" href="${review.url || `film-review.html?film=${review.slug}`}" style="--image:url('${review.image}')"><p class="review-meta">${review.year} · ${review.genre}</p><h3>${review.title}</h3><p class="rating">${review.rating}</p></a>`).join('') || '<p class="empty">Nothing lurking here yet. Try another search.</p>'; };
   filterRoot.addEventListener('click', event => { if (!event.target.matches('.filter')) return; filterRoot.querySelector('.active').classList.remove('active'); event.target.classList.add('active'); renderReviews(); });
   document.querySelector('#review-search').addEventListener('input', renderReviews); renderReviews();
+}
+
+const dynamicReview = document.querySelector('#dynamic-review');
+if (dynamicReview) {
+  const slug = new URLSearchParams(window.location.search).get('film');
+  const review = content.reviews.find(item => item.slug === slug);
+  if (review) {
+    document.title = `${review.title} | Laura Loves Horror`;
+    dynamicReview.innerHTML = `<a class="text-link" href="reviews.html">All reviews <span>←</span></a><p class="eyebrow">Film review · ${review.year} · ${review.genre}</p><h1>${review.title}</h1><div class="review-detail-meta"><span>Laura Loves Horror review</span><span class="rating">${review.rating}<small>Laura's rating</small></span></div><div class="review-detail-image" style="--image:url('${review.image}')"></div><div class="review-detail-copy"><p class="lede">Laura's review of ${review.title} is coming soon.</p><p>This review page is ready for your full thoughts, analysis and rating. You can add the published review text here whenever you are ready.</p><a class="button button-primary" href="reviews.html">More film reviews <span>→</span></a></div>`;
+  } else {
+    dynamicReview.innerHTML = `<p class="eyebrow">Review not found</p><h1>Nothing<br/><em>here yet.</em></h1><a class="button button-primary" href="reviews.html">Back to reviews <span>→</span></a>`;
+  }
 }
 
 const footerSocials = document.querySelector('footer .socials');
