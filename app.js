@@ -54,8 +54,11 @@ if (dynamicReview) {
 }
 
 const footerSocials = document.querySelector('footer .socials');
-if (footerSocials) footerSocials.innerHTML = `<a href="https://www.youtube.com/@lauraloveshorrors" target="_blank" rel="noreferrer">YouTube</a><a href="https://www.tiktok.com/@lauraloveshorror" target="_blank" rel="noreferrer">TikTok</a><a href="https://www.instagram.com/lauraloveshorrors/" target="_blank" rel="noreferrer">Instagram</a><a href="https://www.facebook.com/profile.php?id=100066728311100" target="_blank" rel="noreferrer">Facebook</a><a href="https://www.patreon.com/cw/LauraLovesHorror" target="_blank" rel="noreferrer">Patreon</a><a data-shop-link href="#">Shop</a>`;
+if (footerSocials) footerSocials.innerHTML = `<a href="https://www.youtube.com/@lauraloveshorrors" target="_blank" rel="noreferrer">YouTube</a><a href="https://www.tiktok.com/@lauraloveshorror" target="_blank" rel="noreferrer">TikTok</a><a href="https://www.instagram.com/lauraloveshorrors/" target="_blank" rel="noreferrer">Instagram</a><a href="https://www.facebook.com/profile.php?id=100066728311100" target="_blank" rel="noreferrer">Facebook</a><a href="https://www.patreon.com/cw/LauraLovesHorror" target="_blank" rel="noreferrer">Patreon</a><a data-shop-link href="#">Store</a>`;
+const footerDescription = document.querySelector('footer p');
+if (footerDescription) footerDescription.textContent = 'Independant horror film media based in Paris, France';
 const SHOP_URL = content.shop_url || 'https://www.laura-studio.store/pages/laura-loves-horror';
 document.querySelectorAll('[data-shop-link]').forEach(link => { link.href = SHOP_URL; link.target = '_blank'; link.rel = 'noreferrer'; });
+document.querySelectorAll('.main-nav').forEach(nav => { const store = nav.querySelector('[data-shop-link]'); if (!store) return; store.textContent = 'Store'; const patreon = document.createElement('a'); patreon.href = 'https://www.patreon.com/cw/LauraLovesHorror'; patreon.target = '_blank'; patreon.rel = 'noreferrer'; patreon.textContent = 'Patreon'; nav.insertBefore(patreon, store); });
 const toggle = document.querySelector('.menu-toggle'); const nav = document.querySelector('.main-nav');
 if (toggle && nav) { toggle.addEventListener('click', () => { const open = nav.classList.toggle('open'); toggle.setAttribute('aria-expanded', open); }); nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open'))); }
