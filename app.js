@@ -17,10 +17,11 @@ let content = {
     { title: 'The Night House', year: '2020', genre: 'Horror', rating: '★★★★', image: 'https://images.unsplash.com/photo-1549490349-8643362247b5?auto=format&fit=crop&w=600&q=80', slug: 'the-night-house' }
   ],
   crypt: [
-    { id: 'best-horror', title: "The 50 Best Horror Movies I've Ever Seen", type: 'Essential list', url: 'crypt-post.html?article=best-horror', image: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1200&q=85', intro: 'The essential horror films Laura returns to again and again — classics, modern masterpieces and personal obsessions that never lose their power.' },
-    { id: 'horror-2026', title: 'The Best Horror Movies of 2026 — Ranked', type: 'New releases', url: 'crypt-post.html?article=horror-2026', image: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=85', intro: 'The horror releases defining 2026 so far, ranked as Laura watches her way through the year.' },
-    { id: 'genuinely-scary', title: '25 Genuinely Scary Horror Movies', type: 'Watchlist', url: 'crypt-post.html?article=genuinely-scary', image: 'https://images.unsplash.com/photo-1519608487953-e999c86e7450?auto=format&fit=crop&w=1200&q=85', intro: 'A watchlist for when you want a film that actually gets under your skin.' },
-    { id: 'disturbing-horror', title: "20 Disturbing Horror Movies You Won't Forget", type: 'Deep cuts', url: 'crypt-post.html?article=disturbing-horror', image: 'https://images.unsplash.com/photo-1518568740560-333139a27e72?auto=format&fit=crop&w=1200&q=85', intro: 'Twenty horror films that linger in the mind long after the screen goes black.' }
+    { id: '10-scariest-horror-movies', title: "The 10 Scariest Horror Movies I’ve Ever Seen", type: 'Essential list', categories: ['top-10s', 'horror', 'disturbing', 'found-footage'], url: 'the-10-scariest-horror-movies.html', image: 'assets/crypt-scariest-ring.webp', intro: 'After more than 1,000 horror movies, these are the ten that have truly stayed with me, the cursed tapes, night-vision nightmares and haunted places she still thinks about after the credits.' },
+    { id: 'best-horror', title: "The 50 Best Horror Movies I've Ever Seen", type: 'Essential list', categories: ['top-50s', 'horror'], url: 'crypt-post.html?article=best-horror', image: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1200&q=85', intro: 'The essential horror films Laura returns to again and again — classics, modern masterpieces and personal obsessions that never lose their power.' },
+    { id: 'horror-2026', title: 'The Best Horror Movies of 2026 — Ranked', type: 'New releases', categories: ['horror'], url: 'crypt-post.html?article=horror-2026', image: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=85', intro: 'The horror releases defining 2026 so far, ranked as Laura watches her way through the year.' },
+    { id: 'genuinely-scary', title: '25 Genuinely Scary Horror Movies', type: 'Watchlist', categories: ['horror', 'disturbing', 'thrillers'], url: 'crypt-post.html?article=genuinely-scary', image: 'https://images.unsplash.com/photo-1519608487953-e999c86e7450?auto=format&fit=crop&w=1200&q=85', intro: 'A watchlist for when you want a film that actually gets under your skin.' },
+    { id: 'disturbing-horror', title: "20 Disturbing Horror Movies You Won't Forget", type: 'Deep cuts', categories: ['horror', 'disturbing', 'thrillers'], url: 'crypt-post.html?article=disturbing-horror', image: 'https://images.unsplash.com/photo-1518568740560-333139a27e72?auto=format&fit=crop&w=1200&q=85', intro: 'Twenty horror films that linger in the mind long after the screen goes black.' }
   ]
 };
 
@@ -41,7 +42,20 @@ const cryptPreview = document.querySelector('#crypt-preview-grid');
 if (cryptPreview) cryptPreview.innerHTML = content.crypt.slice(0, 3).map(article => `<a class="crypt-card" href="${article.url}" style="--image:url('${article.image}')"><span>${article.type}</span><h3>${article.title}</h3><b>Read more <i>→</i></b></a>`).join('');
 
 const cryptArticles = document.querySelector('#crypt-articles');
-if (cryptArticles) cryptArticles.innerHTML = content.crypt.map(article => `<a id="${article.id}" class="crypt-article" href="${article.url}"><div class="crypt-article-image" style="--image:url('${article.image}')"></div><div><p class="eyebrow">${article.type}</p><h2>${article.title}</h2><p>${article.intro}</p><span class="text-link">Read article <b>→</b></span></div></a>`).join('');
+const cryptCategoryNav = document.querySelector('#crypt-category-nav');
+if (cryptArticles) {
+  const renderCryptArticles = (category = 'all') => {
+    const articles = category === 'all' ? content.crypt : content.crypt.filter(article => article.categories?.includes(category));
+    cryptArticles.innerHTML = articles.length ? articles.map(article => `<a id="${article.id}" class="crypt-article" href="${article.url}"><div class="crypt-article-image" style="--image:url('${article.image}')"></div><div><p class="eyebrow">${article.type}</p><h2>${article.title}</h2><p>${article.intro}</p><span class="text-link">Read article <b>→</b></span></div></a>`).join('') : `<p class="crypt-empty">More stories are coming soon.</p>`;
+  };
+  renderCryptArticles();
+  cryptCategoryNav?.addEventListener('click', (event) => {
+    const button = event.target.closest('[data-crypt-category]');
+    if (!button) return;
+    cryptCategoryNav.querySelectorAll('button').forEach(item => item.classList.toggle('active', item === button));
+    renderCryptArticles(button.dataset.cryptCategory);
+  });
+}
 
 const cryptArticlePage = document.querySelector('#crypt-article-page');
 if (cryptArticlePage) {
