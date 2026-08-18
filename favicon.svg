@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Laura Loves Horror">
+  <rect width="512" height="512" rx="96" fill="#080808"/>
+  <rect x="18" y="18" width="476" height="476" rx="80" fill="none" stroke="#2b2b2b" stroke-width="4"/>
+  <text x="126" y="316" text-anchor="middle" fill="#f6f1ea" font-family="Georgia, serif" font-size="188" font-weight="700">L</text>
+  <text x="256" y="316" text-anchor="middle" fill="#c71924" font-family="Georgia, serif" font-size="188" font-weight="700" font-style="italic">L</text>
+  <text x="385" y="316" text-anchor="middle" fill="#f6f1ea" font-family="Georgia, serif" font-size="188" font-weight="700">H</text>
+</svg>
