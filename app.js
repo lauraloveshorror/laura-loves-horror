@@ -1,10 +1,10 @@
 // Shared content and page interactions for Laura Loves Horror.
 let content = {
-  videos: [
-    { id: 'mJUkFrxHfoY', start: 106, label: 'Latest upload · Laura Loves Horror' },
-    { id: 'ZGZzD5VdA7Q', label: 'Laura Loves Horror · Watch now' },
-    { id: 'NbIny7Vej34', start: 8, label: 'Laura Loves Horror · Watch now' }
-  ],
+    videos: [
+      { id: 'NXjhMHKlqH4', label: 'New today · Laura Loves Horror' },
+      { id: 'pHwi8YHLjvc', label: 'New yesterday · Laura Loves Horror' },
+      { id: 'mJUkFrxHfoY', start: 106, label: 'Laura Loves Horror · Watch now' }
+    ],
   review: { title: 'The Orphanage', year: '2007', director: 'J. A. Bayona', genre: 'Gothic horror · Drama', rating: '★★★★★', image: 'orphanage-still.jpg', copy: 'A beautifully haunting ghost story that is as heartbreaking as it is frightening. Laura loved it — an absolute five-star watch.', url: 'the-orphanage.html' },
   reviews: [
     { title: 'The Orphanage', year: '2007', genre: 'Gothic Horror', rating: '★★★★★', image: 'orphanage-still.jpg', url: 'the-orphanage.html' },
