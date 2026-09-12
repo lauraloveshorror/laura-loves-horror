@@ -1,9 +1,11 @@
 // Shared content and page interactions for Laura Loves Horror.
 let content = {
     videos: [
-      { id: 'NXjhMHKlqH4', label: 'New today · Laura Loves Horror' },
-      { id: 'pHwi8YHLjvc', label: 'New yesterday · Laura Loves Horror' },
-      { id: 'mJUkFrxHfoY', start: 106, label: 'Laura Loves Horror · Watch now' }
+      { id: 'dBWL65hd0dk', label: 'My thoughts on Resident Evil (2026)', url: 'https://www.youtube.com/watch?v=dBWL65hd0dk&t=1467s' },
+      { id: '1Ajzkpe8wIo', label: "Top 10 Most Disturbing Horrors I've Ever Seen", url: 'https://www.youtube.com/watch?v=1Ajzkpe8wIo&t=227s' },
+      { id: '1yGwKYdW8hU', label: 'Ranking Every Saw Trap (78 Traps)', url: 'https://www.youtube.com/watch?v=1yGwKYdW8hU&t=5877s' },
+      { id: 'QxiLlqTOLho', label: 'Buddy (2026), Movie Review', url: 'https://www.youtube.com/watch?v=QxiLlqTOLho&t=11s' },
+      { id: 'suRc0Ga-iX4', label: 'Everything I watched in August, Letterboxd Roundup', url: 'https://www.youtube.com/watch?v=suRc0Ga-iX4&t=358s' }
     ],
   review: { title: 'The Orphanage', year: '2007', director: 'J. A. Bayona', genre: 'Gothic horror · Drama', rating: '★★★★★', image: 'orphanage-still.jpg', copy: 'A beautifully haunting ghost story that is as heartbreaking as it is frightening. Laura loved it — an absolute five-star watch.', url: 'the-orphanage.html' },
   reviews: [
@@ -33,7 +35,7 @@ try {
 } catch { console.info('Using the built-in website content.'); }
 
 const videoGrid = document.querySelector('#video-grid');
-if (videoGrid) videoGrid.innerHTML = content.videos.map((v, i) => `<article class="video-embed ${i === 0 ? 'video-embed-featured' : ''}"><iframe src="https://www.youtube-nocookie.com/embed/${v.id}${v.start ? `?start=${v.start}` : ''}" title="Laura Loves Horror video" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><div class="embed-caption"><p class="video-meta">${v.label}</p><a href="https://www.youtube.com/watch?v=${v.id}" target="_blank" rel="noreferrer">Watch <span>↗</span></a></div></article>`).join('');
+if (videoGrid) videoGrid.innerHTML = content.videos.map((v, i) => `<article class="video-embed ${i === 0 ? 'video-embed-featured' : ''}"><iframe src="https://www.youtube-nocookie.com/embed/${v.id}${v.start ? `?start=${v.start}` : ''}" title="${v.label}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><div class="embed-caption"><p class="video-meta">${v.label}</p><a href="${v.url || `https://www.youtube.com/watch?v=${v.id}`}" target="_blank" rel="noreferrer">Watch <span>↗</span></a></div></article>`).join('');
 
 const featureReview = document.querySelector('#feature-review');
 if (featureReview) { const r = content.review; featureReview.innerHTML = `<div class="review-art" style="--image:url('${r.image}')"></div><article class="review-content"><p class="review-meta">New review · ${r.year} · ${r.genre}</p><h3>${r.title}</h3><p class="review-meta">Directed by ${r.director}</p><p class="rating">${r.rating}<small>Laura's rating</small></p><p>${r.copy}</p><a href="${r.url}" class="button button-ghost">Read review <span>→</span></a></article>`; }
