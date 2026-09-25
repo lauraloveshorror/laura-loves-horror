@@ -1,6 +1,9 @@
 // Shared content and page interactions for Laura Loves Horror.
 let content = {
     videos: [
+      { id: 'TPbjkXf9Ilo', label: 'Latest upload · Laura Loves Horror', url: 'https://www.youtube.com/watch?v=TPbjkXf9Ilo&t=1290s' },
+      { id: 'd20QCz8gMk4', label: 'Latest upload · Laura Loves Horror', url: 'https://www.youtube.com/watch?v=d20QCz8gMk4&t=2218s' },
+      { id: 'g3t7K_NBAF8', label: 'Latest upload · Laura Loves Horror', url: 'https://www.youtube.com/watch?v=g3t7K_NBAF8&t=682s' },
       { id: 'dBWL65hd0dk', label: 'My thoughts on Resident Evil (2026)', url: 'https://www.youtube.com/watch?v=dBWL65hd0dk&t=1467s' },
       { id: '1Ajzkpe8wIo', label: "Top 10 Most Disturbing Horrors I've Ever Seen", url: 'https://www.youtube.com/watch?v=1Ajzkpe8wIo&t=227s' },
       { id: '1yGwKYdW8hU', label: 'Ranking Every Saw Trap (78 Traps)', url: 'https://www.youtube.com/watch?v=1yGwKYdW8hU&t=5877s' },
